@@ -1,644 +1,665 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Samahani Cotizador</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
-
-<style>
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-}
-
-/* =========================
-   FONDO REAL DE LA PÁGINA
-   ========================= */
-
-.fondo-pagina {
-  position: fixed;
-
-  top: 0;
-  left: 0;
-
-  width: 100vw;
-  height: 100vh;
-
-  object-fit: cover;
-  object-position: center center;
-
-  z-index: -10;
-
-  pointer-events: none;
-}
-
-/* ========================= */
-
-body {
-
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  font-family: "Yeseva One", serif;
-
-  background-color: #244d0a;
-
-  overflow-x: hidden;
-
-  padding-bottom: 50px;
-
-}
-
-/* =========================
-   DECORACIÓN
-   ========================= */
-
-.decoracion {
-
-  width: min(90vw, 850px);
-
-  margin-top: 20px;
-
-  position: relative;
-
-  z-index: 2;
-
-}
-
-.decoracion img {
-
-  width: 100%;
-  height: auto;
-
-  display: block;
-
-}
-
-/* =========================
-   CONTENEDOR DEL PLATO
-   ========================= */
-
-.contenedor-plato {
-
-  position: relative;
-
-  width: min(92vw, 800px);
-
-  margin-top: -20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-/* =========================
-   PLATO
-   ========================= */
-
-.plato {
-
-  width: 100%;
-  height: auto;
-
-  display: block;
-
-  position: relative;
-
-  z-index: 1;
-
-  pointer-events: none;
-
-}
-
-/* =========================
-   COTIZADOR
-   ========================= */
-
-.cotizador {
-
-  position: absolute;
-
-  z-index: 2;
-
-  width: 54%;
-
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  text-align: center;
-
-}
-
-/* =========================
-   INPUT
-   ========================= */
-
-.input-contenedor {
-
-  position: relative;
-
-  width: 100%;
-
-}
-
-.input-usd {
-
-  width: 100%;
-
-  padding: 20px 65px 20px 22px;
-
-  border: 2px solid #9d2924;
-
-  border-radius: 20px;
-
-  background: rgba(255,255,255,0.80);
-
-  color: #555;
-
-  font-family: "Yeseva One", serif;
-
-  font-size: 24px;
-
-  outline: none;
-
-}
-
-.input-usd::placeholder {
-
-  color: #777;
-
-}
-
-.input-usd:focus {
-
-  border-color: #7d211d;
-
-  box-shadow: 0 0 0 4px rgba(157,41,36,0.15);
-
-}
-
-.simbolo {
-
-  position: absolute;
-
-  top: 50%;
-  right: 22px;
-
-  transform: translateY(-50%);
-
-  color: #92251f;
-
-  font-size: 36px;
-
-  pointer-events: none;
-
-}
-
-/* =========================
-   BOTÓN
-   ========================= */
-
-.boton-cotizar {
-
-  width: 100%;
-
-  margin-top: 20px;
-
-  padding: 20px;
-
-  border: none;
-
-  border-radius: 20px;
-
-  background: linear-gradient(
-    135deg,
-    #63951b,
-    #416d0e
-  );
-
-  color: white;
-
-  font-family: "Yeseva One", serif;
-
-  font-size: 25px;
-
-  cursor: pointer;
-
-  box-shadow: 0 6px 0 #31510d;
-
-}
-
-.boton-cotizar:active {
-
-  transform: translateY(4px);
-
-  box-shadow: 0 2px 0 #31510d;
-
-}
-
-/* =========================
-   SEPARADOR
-   ========================= */
-
-.separador {
-
-  width: 100%;
-
-  margin: 30px 0 25px;
-
-  border-top: 2px dotted #a52b25;
-
-}
-
-/* =========================
-   RESULTADO
-   ========================= */
-
-.resultado {
-
-  display: none;
-
-  width: 100%;
-
-  padding: 25px 15px;
-
-  border: 2px dashed #a52b25;
-
-  border-radius: 22px;
-
-  background: rgba(255,255,255,0.18);
-
-  color: #92251f;
-
-  font-size: 42px;
-
-  word-break: break-word;
-
-}
-
-/* =========================
-   ERROR
-   ========================= */
-
-.error {
-
-  display: none;
-
-  margin-top: 15px;
-
-  color: #a0201b;
-
-  font-family: Arial, sans-serif;
-
-  font-weight: bold;
-
-}
-
-/* =========================
-   AVISO
-   ========================= */
-
-.aviso {
-
-  display: none;
-
-  width: min(88vw, 650px);
-
-  margin-top: 15px;
-
-  padding: 15px 20px;
-
-  background: rgba(255,255,255,0.70);
-
-  border-radius: 18px;
-
-  color: #7d211d;
-
-  font-family: Arial, sans-serif;
-
-  font-size: 15px;
-
-  font-weight: bold;
-
-  line-height: 1.6;
-
-  text-align: center;
-
-  position: relative;
-
-  z-index: 2;
-
-}
-
-/* =========================
-   CELULAR
-   ========================= */
-
-@media (max-width: 600px) {
-
-  .fondo-pagina {
-
-    object-position: center top;
-
-  }
-
-  .decoracion {
-
-    width: 96vw;
-
-    margin-top: 10px;
-
-  }
-
-  .contenedor-plato {
-
-    width: 115vw;
-
-    max-width: none;
-
-    margin-top: -10px;
-
-  }
-
-  .cotizador {
-
-    width: 48%;
-
-  }
-
-  .input-usd {
-
-    padding: 14px 42px 14px 12px;
-
-    border-radius: 14px;
-
-    font-size: 15px;
-
-  }
-
-  .simbolo {
-
-    right: 13px;
-
-    font-size: 24px;
-
-  }
-
-  .boton-cotizar {
-
-    margin-top: 13px;
-
-    padding: 14px;
-
-    border-radius: 14px;
-
-    font-size: 16px;
-
-    box-shadow: 0 4px 0 #31510d;
-
-  }
-
-  .separador {
-
-    margin: 20px 0 16px;
-
-  }
-
-  .resultado {
-
-    padding: 18px 8px;
-
-    border-radius: 15px;
-
-    font-size: 27px;
-
-  }
-
-  .aviso {
-
-    width: 88vw;
-
-    margin-top: 5px;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-  }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<!-- =========================
-     FONDO
-     PRIMERA IMAGEN
-     ========================= -->
-
-<img
-  src="fondo.png"
-  class="fondo-pagina"
-  alt=""
->
-
-
-<!-- =========================
-     DECORACIÓN
-     SEGUNDA IMAGEN
-     ========================= -->
-
-<div class="decoracion">
-
-  <img
-    src="decoracion.png"
-    alt="Samahani Cotizador"
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
   >
 
-</div>
+  <title>Samahani Cotizador</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<!-- =========================
-     PLATO + COTIZADOR
-     ========================= -->
-
-<div class="contenedor-plato">
-
-  <!-- TERCERA IMAGEN -->
-
-  <img
-    src="plato.png"
-    class="plato"
-    alt=""
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
   >
 
+  <link
+    href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"
+    rel="stylesheet"
+  >
 
-  <div class="cotizador">
+  <style>
 
-
-    <div class="input-contenedor">
-
-      <input
-        type="number"
-        id="precioUSD"
-        class="input-usd"
-        placeholder="Precio en USD"
-        min="0"
-        step="0.01"
-      >
-
-      <span class="simbolo">$</span>
-
-    </div>
+    * {
+      box-sizing: border-box;
+    }
 
 
-    <button
-      type="button"
-      class="boton-cotizar"
-      onclick="cotizar()"
-    >
-      COTIZAR
-    </button>
+    /* =========================
+       PÁGINA
+    ========================= */
+
+    html {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+
+      font-family: Arial, sans-serif;
+
+      overflow-x: hidden;
+
+      position: relative;
+    }
 
 
-    <div class="separador"></div>
+    /* =========================
+       FONDO
+       fondo.png
+    ========================= */
+
+    .fondo {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position: center;
+
+      z-index: -1;
+
+      pointer-events: none;
+
+    }
 
 
-    <div
-      id="resultado"
-      class="resultado"
-    ></div>
+    /* =========================
+       CONTENIDO GENERAL
+    ========================= */
+
+    .pagina {
+
+      width: 100%;
+      min-height: 100vh;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      padding: 20px 15px 40px;
+
+    }
 
 
-    <div
-      id="error"
-      class="error"
-    >
-      Ingresá un precio válido.
-    </div>
+    /* =========================
+       DECORACIÓN
+       decoracion.png
+    ========================= */
+
+    .decoracion {
+
+      width: min(850px, 95vw);
+
+      position: relative;
+
+      z-index: 2;
+
+      margin-bottom: -30px;
+
+    }
+
+    .decoracion img {
+
+      display: block;
+
+      width: 100%;
+
+      height: auto;
+
+    }
 
 
-  </div>
+    /* =========================
+       PLATO
+       plato.png
+    ========================= */
 
-</div>
+    .zona-cotizador {
 
+      width: min(800px, 95vw);
 
-<!-- =========================
-     AVISO
-     ========================= -->
+      position: relative;
 
-<div
-  id="aviso"
-  class="aviso"
->
+      display: flex;
 
-  La cotización ya incluye envío a casilla coreana,
-  faltan envío e impuestos argentinos.
+      justify-content: center;
 
-</div>
+      align-items: center;
 
+    }
 
-<script>
+    .plato {
 
-function cotizar() {
+      display: block;
 
-  const precio = parseFloat(
-    document.getElementById("precioUSD").value
-  );
+      width: 100%;
 
-  const dolar = 1600;
+      height: auto;
 
-  const resultado =
-    document.getElementById("resultado");
+      pointer-events: none;
 
-  const error =
-    document.getElementById("error");
-
-  const aviso =
-    document.getElementById("aviso");
+    }
 
 
-  if (isNaN(precio) || precio <= 0) {
+    /* =========================
+       COTIZADOR
+       SIN FONDO PROPIO
+    ========================= */
 
-    resultado.style.display = "none";
+    .cotizador {
 
-    aviso.style.display = "none";
+      position: absolute;
 
-    error.style.display = "block";
+      top: 50%;
 
-    return;
+      left: 50%;
 
-  }
+      transform: translate(-50%, -50%);
 
+      width: 55%;
 
-  error.style.display = "none";
+      text-align: center;
 
-
-  /* SIN FEES */
-
-  const totalARS = precio * dolar;
+    }
 
 
-  resultado.innerHTML =
-    "$ " +
-    totalARS.toLocaleString(
-      "es-AR",
-      {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
+    /* =========================
+       INPUT
+    ========================= */
+
+    .campo-precio {
+
+      position: relative;
+
+      width: 100%;
+
+    }
+
+    #precioUSD {
+
+      width: 100%;
+
+      padding: 18px 60px 18px 20px;
+
+      border: 2px solid #9b2924;
+
+      border-radius: 18px;
+
+      background: rgba(255, 255, 255, 0.45);
+
+      color: #6d2a25;
+
+      font-family: "Yeseva One", serif;
+
+      font-size: 23px;
+
+      outline: none;
+
+    }
+
+    #precioUSD::placeholder {
+
+      color: #777;
+
+    }
+
+    #precioUSD:focus {
+
+      border-color: #7d1f1b;
+
+    }
+
+
+    .dolar {
+
+      position: absolute;
+
+      right: 20px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #92251f;
+
+      font-family: "Yeseva One", serif;
+
+      font-size: 32px;
+
+      pointer-events: none;
+
+    }
+
+
+    /* =========================
+       BOTÓN
+    ========================= */
+
+    button {
+
+      width: 100%;
+
+      margin-top: 18px;
+
+      padding: 18px;
+
+      border: none;
+
+      border-radius: 18px;
+
+      background: #4f7d13;
+
+      color: white;
+
+      font-family: "Yeseva One", serif;
+
+      font-size: 23px;
+
+      cursor: pointer;
+
+      box-shadow: 0 5px 0 #35580c;
+
+      transition: 0.2s;
+
+    }
+
+    button:hover {
+
+      transform: translateY(-2px);
+
+    }
+
+    button:active {
+
+      transform: translateY(3px);
+
+      box-shadow: 0 2px 0 #35580c;
+
+    }
+
+
+    /* =========================
+       SEPARADOR
+    ========================= */
+
+    .separador {
+
+      border-top: 2px dotted #a22c26;
+
+      margin: 28px 0 22px;
+
+    }
+
+
+    /* =========================
+       RESULTADO
+    ========================= */
+
+    #resultado {
+
+      display: none;
+
+      width: 100%;
+
+      padding: 25px 10px;
+
+      border: 2px dashed #a22c26;
+
+      border-radius: 20px;
+
+      color: #92251f;
+
+      font-family: "Yeseva One", serif;
+
+      font-size: 42px;
+
+    }
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    #error {
+
+      display: none;
+
+      margin-top: 15px;
+
+      color: #9b2924;
+
+      font-weight: bold;
+
+      font-size: 14px;
+
+    }
+
+
+    /* =========================
+       TEXTO INFERIOR
+    ========================= */
+
+    #aviso {
+
+      display: none;
+
+      width: min(650px, 90vw);
+
+      margin-top: 20px;
+
+      padding: 10px 20px;
+
+      text-align: center;
+
+      color: #6d2a25;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      line-height: 1.5;
+
+    }
+
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .pagina {
+
+        padding-top: 10px;
+
       }
-    );
 
 
-  resultado.style.display = "block";
+      .decoracion {
 
-  aviso.style.display = "block";
+        width: 100vw;
 
-}
+        margin-bottom: -15px;
+
+      }
 
 
-/* COTIZAR CON ENTER */
+      .zona-cotizador {
 
-document
-  .getElementById("precioUSD")
-  .addEventListener(
-    "keydown",
-    function(event) {
+        width: 120vw;
 
-      if (event.key === "Enter") {
+      }
 
-        cotizar();
+
+      .cotizador {
+
+        width: 48%;
+
+      }
+
+
+      #precioUSD {
+
+        padding: 13px 40px 13px 12px;
+
+        border-radius: 13px;
+
+        font-size: 15px;
+
+      }
+
+
+      .dolar {
+
+        right: 12px;
+
+        font-size: 22px;
+
+      }
+
+
+      button {
+
+        margin-top: 12px;
+
+        padding: 13px;
+
+        border-radius: 13px;
+
+        font-size: 16px;
+
+      }
+
+
+      .separador {
+
+        margin: 18px 0 14px;
+
+      }
+
+
+      #resultado {
+
+        padding: 16px 5px;
+
+        border-radius: 15px;
+
+        font-size: 27px;
+
+      }
+
+
+      #error {
+
+        font-size: 11px;
+
+      }
+
+
+      #aviso {
+
+        margin-top: 5px;
+
+        font-size: 12px;
+
+        padding: 10px;
 
       }
 
     }
-  );
 
-</script>
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- FONDO COMPLETO -->
+
+  <img
+    class="fondo"
+    src="./fondo.png"
+    alt=""
+  >
+
+
+  <main class="pagina">
+
+
+    <!-- DECORACIÓN SUPERIOR -->
+
+    <div class="decoracion">
+
+      <img
+        src="./decoracion.png"
+        alt="Samahani Cotizador"
+      >
+
+    </div>
+
+
+    <!-- PLATO Y COTIZADOR -->
+
+    <div class="zona-cotizador">
+
+
+      <img
+        class="plato"
+        src="./plato.png"
+        alt=""
+      >
+
+
+      <div class="cotizador">
+
+
+        <div class="campo-precio">
+
+          <input
+            type="number"
+            id="precioUSD"
+            placeholder="Precio en USD"
+            min="0"
+            step="0.01"
+          >
+
+          <span class="dolar">$</span>
+
+        </div>
+
+
+        <button onclick="cotizar()">
+
+          COTIZAR
+
+        </button>
+
+
+        <div class="separador"></div>
+
+
+        <div id="resultado"></div>
+
+
+        <div id="error">
+
+          Ingresá un precio válido.
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- TEXTO DESPUÉS DE COTIZAR -->
+
+    <div id="aviso">
+
+      La cotización ya incluye envío a casilla coreana,
+      faltan envío e impuestos argentinos.
+
+    </div>
+
+
+  </main>
+
+
+  <script>
+
+    function cotizar() {
+
+      const precio = parseFloat(
+        document.getElementById("precioUSD").value
+      );
+
+      const resultado =
+        document.getElementById("resultado");
+
+      const error =
+        document.getElementById("error");
+
+      const aviso =
+        document.getElementById("aviso");
+
+
+      if (isNaN(precio) || precio <= 0) {
+
+        resultado.style.display = "none";
+
+        aviso.style.display = "none";
+
+        error.style.display = "block";
+
+        return;
+
+      }
+
+
+      error.style.display = "none";
+
+
+      /* DÓLAR A $1600 - SIN FEES */
+
+      const totalARS = precio * 1600;
+
+
+      resultado.innerHTML =
+        "$ " +
+        totalARS.toLocaleString(
+          "es-AR",
+          {
+            maximumFractionDigits: 0
+          }
+        );
+
+
+      resultado.style.display = "block";
+
+      aviso.style.display = "block";
+
+    }
+
+
+    document
+      .getElementById("precioUSD")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+
+            cotizar();
+
+          }
+
+        }
+      );
+
+  </script>
+
 
 </body>
 </html>
