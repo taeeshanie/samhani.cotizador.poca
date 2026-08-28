@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>🍎🍀Pocamarket🍀🍎</title>
+  <title>Pocamarket Cotizador</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -37,7 +37,6 @@
     }
 
     body {
-
       margin: 0;
       min-height: 100vh;
 
@@ -50,7 +49,6 @@
       font-family: Arial, sans-serif;
 
       overflow-x: hidden;
-
     }
 
     /* =========================
@@ -58,7 +56,6 @@
     ========================= */
 
     .pagina {
-
       min-height: 100vh;
 
       display: flex;
@@ -66,37 +63,13 @@
       align-items: center;
 
       padding: 25px 15px 50px;
-
     }
 
     /* =========================
-       TÍTULO
-    ========================= */
-
-    .titulo {
-
-      margin: 0 0 10px;
-
-      color: #8e211d;
-
-      font-family: "Yeseva One", serif;
-
-      font-size: clamp(32px, 6vw, 60px);
-
-      text-align: center;
-
-      text-shadow:
-        2px 2px 0 #f8f0dc,
-        4px 4px 10px rgba(0,0,0,0.25);
-
-    }
-
-    /* =========================
-       DECORACIÓN
+       DECORACIÓN SUPERIOR
     ========================= */
 
     .decoracion {
-
       width: min(850px, 95vw);
 
       position: relative;
@@ -104,16 +77,13 @@
       z-index: 2;
 
       margin-bottom: -25px;
-
     }
 
     .decoracion img {
-
       display: block;
 
       width: 100%;
       height: auto;
-
     }
 
     /* =========================
@@ -121,7 +91,6 @@
     ========================= */
 
     .zona-cotizador {
-
       width: min(800px, 95vw);
 
       position: relative;
@@ -129,18 +98,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
     }
 
     .plato {
-
       display: block;
 
       width: 100%;
       height: auto;
 
       pointer-events: none;
-
     }
 
     /* =========================
@@ -148,7 +114,6 @@
     ========================= */
 
     .cotizador {
-
       position: absolute;
 
       top: 50%;
@@ -159,7 +124,6 @@
       width: 55%;
 
       text-align: center;
-
     }
 
     /* =========================
@@ -167,15 +131,12 @@
     ========================= */
 
     .campo-precio {
-
       position: relative;
 
       width: 100%;
-
     }
 
     #precioUSD {
-
       width: 100%;
 
       padding: 18px 60px 18px 20px;
@@ -193,25 +154,19 @@
       font-size: 23px;
 
       outline: none;
-
     }
 
     #precioUSD::placeholder {
-
       color: #777;
-
     }
 
     #precioUSD:focus {
-
       border-color: #7d1f1b;
 
       box-shadow: 0 0 0 4px rgba(155, 41, 36, 0.15);
-
     }
 
     .dolar {
-
       position: absolute;
 
       right: 20px;
@@ -226,7 +181,6 @@
       font-size: 32px;
 
       pointer-events: none;
-
     }
 
     /* =========================
@@ -234,7 +188,6 @@
     ========================= */
 
     button {
-
       width: 100%;
 
       margin-top: 18px;
@@ -258,21 +211,16 @@
       box-shadow: 0 5px 0 #35580c;
 
       transition: 0.2s;
-
     }
 
     button:hover {
-
       transform: translateY(-2px);
-
     }
 
     button:active {
-
       transform: translateY(3px);
 
       box-shadow: 0 2px 0 #35580c;
-
     }
 
     /* =========================
@@ -280,11 +228,9 @@
     ========================= */
 
     .separador {
-
       border-top: 2px dotted #a22c26;
 
       margin: 28px 0 22px;
-
     }
 
     /* =========================
@@ -292,7 +238,6 @@
     ========================= */
 
     #resultado {
-
       display: none;
 
       width: 100%;
@@ -311,6 +256,7 @@
 
       font-size: 42px;
 
+      text-align: center;
     }
 
     /* =========================
@@ -318,7 +264,6 @@
     ========================= */
 
     #error {
-
       display: none;
 
       margin-top: 15px;
@@ -329,6 +274,7 @@
 
       font-size: 14px;
 
+      text-align: center;
     }
 
     /* =========================
@@ -336,7 +282,6 @@
     ========================= */
 
     #aviso {
-
       display: none;
 
       width: min(650px, 90vw);
@@ -363,76 +308,52 @@
 
       box-shadow:
         0 7px 0 #4f7d13,
-        0 12px 20px rgba(0,0,0,0.25);
-
+        0 12px 20px rgba(0, 0, 0, 0.25);
     }
 
     /* =========================
-       CELULAR
+       VERSIÓN CELULAR
     ========================= */
 
     @media (max-width: 600px) {
 
       body {
-
         background-attachment: scroll;
-
       }
 
       .pagina {
-
         padding-top: 18px;
-
-      }
-
-      .titulo {
-
-        font-size: 30px;
-
-        margin-bottom: 5px;
-
       }
 
       .decoracion {
-
         width: 100vw;
 
         margin-bottom: -15px;
-
       }
 
       .zona-cotizador {
-
         width: 120vw;
-
       }
 
       .cotizador {
-
         width: 48%;
-
       }
 
       #precioUSD {
-
         padding: 13px 40px 13px 12px;
 
         border-radius: 13px;
 
         font-size: 15px;
-
       }
 
       .dolar {
-
         right: 12px;
 
         font-size: 22px;
-
       }
 
       button {
-
         margin-top: 12px;
 
         padding: 13px;
@@ -440,33 +361,25 @@
         border-radius: 13px;
 
         font-size: 16px;
-
       }
 
       .separador {
-
         margin: 18px 0 14px;
-
       }
 
       #resultado {
-
         padding: 16px 5px;
 
         border-radius: 15px;
 
         font-size: 27px;
-
       }
 
       #error {
-
         font-size: 11px;
-
       }
 
       #aviso {
-
         width: 92vw;
 
         margin-top: 18px;
@@ -483,8 +396,7 @@
 
         box-shadow:
           0 5px 0 #4f7d13,
-          0 8px 15px rgba(0,0,0,0.2);
-
+          0 8px 15px rgba(0, 0, 0, 0.2);
       }
 
     }
@@ -493,18 +405,12 @@
 
 </head>
 
+
 <body>
 
   <main class="pagina">
 
-    <!-- TÍTULO -->
-
-    <h1 class="titulo">
-      🍎🍀Pocamarket🍀🍎
-    </h1>
-
-
-    <!-- DECORACIÓN -->
+    <!-- DECORACIÓN SUPERIOR -->
 
     <div class="decoracion">
 
@@ -529,6 +435,8 @@
 
       <div class="cotizador">
 
+        <!-- CAMPO DE PRECIO -->
+
         <div class="campo-precio">
 
           <input
@@ -544,6 +452,8 @@
         </div>
 
 
+        <!-- BOTÓN -->
+
         <button
           type="button"
           onclick="cotizar()"
@@ -552,11 +462,17 @@
         </button>
 
 
+        <!-- SEPARADOR -->
+
         <div class="separador"></div>
 
 
+        <!-- RESULTADO -->
+
         <div id="resultado"></div>
 
+
+        <!-- ERROR -->
 
         <div id="error">
           Ingresá un precio válido.
@@ -567,7 +483,7 @@
     </div>
 
 
-    <!-- AVISO -->
+    <!-- AVISO DESPUÉS DE COTIZAR -->
 
     <div id="aviso">
 
@@ -616,7 +532,7 @@
       error.style.display = "none";
 
 
-      /* DÓLAR A 1600 - SIN FEES */
+      /* COTIZACIÓN SIN FEES - DÓLAR A $1600 */
 
       const totalARS = precio * 1600;
 
@@ -637,6 +553,8 @@
 
     }
 
+
+    /* PERMITE COTIZAR CON ENTER */
 
     document
       .getElementById("precioUSD")
