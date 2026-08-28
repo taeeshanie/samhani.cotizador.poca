@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -8,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Samahani Cotizador</title>
+  <title>🍎🍀Pocamarket🍀🍎</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -29,79 +31,68 @@
       box-sizing: border-box;
     }
 
-
-    /* =========================
-       PÁGINA
-    ========================= */
-
     html {
       width: 100%;
       min-height: 100%;
     }
 
     body {
+
       margin: 0;
-      padding: 0;
-      width: 100%;
       min-height: 100vh;
+
+      background-image: url("./fondo.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
 
       font-family: Arial, sans-serif;
 
       overflow-x: hidden;
 
-      position: relative;
     }
 
-
     /* =========================
-       FONDO
-       fondo.png
-    ========================= */
-
-    .fondo {
-
-      position: fixed;
-
-      top: 0;
-      left: 0;
-
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      object-position: center;
-
-      z-index: -1;
-
-      pointer-events: none;
-
-    }
-
-
-    /* =========================
-       CONTENIDO GENERAL
+       CONTENEDOR GENERAL
     ========================= */
 
     .pagina {
 
-      width: 100%;
       min-height: 100vh;
 
       display: flex;
-
       flex-direction: column;
-
       align-items: center;
 
-      padding: 20px 15px 40px;
+      padding: 25px 15px 50px;
 
     }
 
+    /* =========================
+       TÍTULO
+    ========================= */
+
+    .titulo {
+
+      margin: 0 0 10px;
+
+      color: #8e211d;
+
+      font-family: "Yeseva One", serif;
+
+      font-size: clamp(32px, 6vw, 60px);
+
+      text-align: center;
+
+      text-shadow:
+        2px 2px 0 #f8f0dc,
+        4px 4px 10px rgba(0,0,0,0.25);
+
+    }
 
     /* =========================
        DECORACIÓN
-       decoracion.png
     ========================= */
 
     .decoracion {
@@ -112,7 +103,7 @@
 
       z-index: 2;
 
-      margin-bottom: -30px;
+      margin-bottom: -25px;
 
     }
 
@@ -121,15 +112,12 @@
       display: block;
 
       width: 100%;
-
       height: auto;
 
     }
 
-
     /* =========================
-       PLATO
-       plato.png
+       ZONA DEL PLATO
     ========================= */
 
     .zona-cotizador {
@@ -139,9 +127,7 @@
       position: relative;
 
       display: flex;
-
       justify-content: center;
-
       align-items: center;
 
     }
@@ -151,17 +137,14 @@
       display: block;
 
       width: 100%;
-
       height: auto;
 
       pointer-events: none;
 
     }
 
-
     /* =========================
        COTIZADOR
-       SIN FONDO PROPIO
     ========================= */
 
     .cotizador {
@@ -169,7 +152,6 @@
       position: absolute;
 
       top: 50%;
-
       left: 50%;
 
       transform: translate(-50%, -50%);
@@ -179,7 +161,6 @@
       text-align: center;
 
     }
-
 
     /* =========================
        INPUT
@@ -203,7 +184,7 @@
 
       border-radius: 18px;
 
-      background: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.55);
 
       color: #6d2a25;
 
@@ -225,15 +206,15 @@
 
       border-color: #7d1f1b;
 
-    }
+      box-shadow: 0 0 0 4px rgba(155, 41, 36, 0.15);
 
+    }
 
     .dolar {
 
       position: absolute;
 
       right: 20px;
-
       top: 50%;
 
       transform: translateY(-50%);
@@ -247,7 +228,6 @@
       pointer-events: none;
 
     }
-
 
     /* =========================
        BOTÓN
@@ -295,7 +275,6 @@
 
     }
 
-
     /* =========================
        SEPARADOR
     ========================= */
@@ -307,7 +286,6 @@
       margin: 28px 0 22px;
 
     }
-
 
     /* =========================
        RESULTADO
@@ -325,6 +303,8 @@
 
       border-radius: 20px;
 
+      background: rgba(255, 255, 255, 0.20);
+
       color: #92251f;
 
       font-family: "Yeseva One", serif;
@@ -332,7 +312,6 @@
       font-size: 42px;
 
     }
-
 
     /* =========================
        ERROR
@@ -352,9 +331,8 @@
 
     }
 
-
     /* =========================
-       TEXTO INFERIOR
+       AVISO DESTACADO
     ========================= */
 
     #aviso {
@@ -363,22 +341,31 @@
 
       width: min(650px, 90vw);
 
-      margin-top: 20px;
+      margin-top: 25px;
 
-      padding: 10px 20px;
+      padding: 22px 28px;
 
       text-align: center;
 
-      color: #6d2a25;
+      background: #f7efd9;
 
-      font-size: 14px;
+      border: 4px solid #8e211d;
 
-      font-weight: bold;
+      border-radius: 25px;
 
-      line-height: 1.5;
+      color: #8e211d;
+
+      font-family: "Yeseva One", serif;
+
+      font-size: 20px;
+
+      line-height: 1.6;
+
+      box-shadow:
+        0 7px 0 #4f7d13,
+        0 12px 20px rgba(0,0,0,0.25);
 
     }
-
 
     /* =========================
        CELULAR
@@ -386,12 +373,25 @@
 
     @media (max-width: 600px) {
 
-      .pagina {
+      body {
 
-        padding-top: 10px;
+        background-attachment: scroll;
 
       }
 
+      .pagina {
+
+        padding-top: 18px;
+
+      }
+
+      .titulo {
+
+        font-size: 30px;
+
+        margin-bottom: 5px;
+
+      }
 
       .decoracion {
 
@@ -401,20 +401,17 @@
 
       }
 
-
       .zona-cotizador {
 
         width: 120vw;
 
       }
 
-
       .cotizador {
 
         width: 48%;
 
       }
-
 
       #precioUSD {
 
@@ -426,7 +423,6 @@
 
       }
 
-
       .dolar {
 
         right: 12px;
@@ -434,7 +430,6 @@
         font-size: 22px;
 
       }
-
 
       button {
 
@@ -448,13 +443,11 @@
 
       }
 
-
       .separador {
 
         margin: 18px 0 14px;
 
       }
-
 
       #resultado {
 
@@ -466,21 +459,31 @@
 
       }
 
-
       #error {
 
         font-size: 11px;
 
       }
 
-
       #aviso {
 
-        margin-top: 5px;
+        width: 92vw;
 
-        font-size: 12px;
+        margin-top: 18px;
 
-        padding: 10px;
+        padding: 18px 20px;
+
+        border-width: 3px;
+
+        border-radius: 20px;
+
+        font-size: 15px;
+
+        line-height: 1.5;
+
+        box-shadow:
+          0 5px 0 #4f7d13,
+          0 8px 15px rgba(0,0,0,0.2);
 
       }
 
@@ -490,29 +493,24 @@
 
 </head>
 
-
 <body>
-
-
-  <!-- FONDO COMPLETO -->
-
-  <img
-    class="fondo"
-    src="./fondo.png"
-    alt=""
-  >
-
 
   <main class="pagina">
 
+    <!-- TÍTULO -->
 
-    <!-- DECORACIÓN SUPERIOR -->
+    <h1 class="titulo">
+      🍎🍀Pocamarket🍀🍎
+    </h1>
+
+
+    <!-- DECORACIÓN -->
 
     <div class="decoracion">
 
       <img
         src="./decoracion.png"
-        alt="Samahani Cotizador"
+        alt="Pocamarket"
       >
 
     </div>
@@ -522,7 +520,6 @@
 
     <div class="zona-cotizador">
 
-
       <img
         class="plato"
         src="./plato.png"
@@ -531,7 +528,6 @@
 
 
       <div class="cotizador">
-
 
         <div class="campo-precio">
 
@@ -548,10 +544,11 @@
         </div>
 
 
-        <button onclick="cotizar()">
-
+        <button
+          type="button"
+          onclick="cotizar()"
+        >
           COTIZAR
-
         </button>
 
 
@@ -562,27 +559,25 @@
 
 
         <div id="error">
-
           Ingresá un precio válido.
-
         </div>
-
 
       </div>
 
-
     </div>
 
 
-    <!-- TEXTO DESPUÉS DE COTIZAR -->
+    <!-- AVISO -->
 
     <div id="aviso">
 
-      La cotización ya incluye envío a casilla coreana,
-      faltan envío e impuestos argentinos.
+      🍀 La cotización ya incluye envío a casilla coreana. 🍀
+
+      <br><br>
+
+      🚚 Faltan agregar el envío e impuestos argentinos.
 
     </div>
-
 
   </main>
 
@@ -621,7 +616,7 @@
       error.style.display = "none";
 
 
-      /* DÓLAR A $1600 - SIN FEES */
+      /* DÓLAR A 1600 - SIN FEES */
 
       const totalARS = precio * 1600;
 
@@ -660,6 +655,6 @@
 
   </script>
 
-
 </body>
+
 </html>
