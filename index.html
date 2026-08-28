@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Samahani Cotizador</title>
+
+
+  <!-- FUENTE -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      padding: 0 15px 100px;
+
+      font-family: "Yeseva One", serif;
+
+      background-image: url("fondo.png");
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
+    }
+
+
+    /* =========================
+       DECORACIÓN SUPERIOR
+    ========================= */
+
+    .decoracion {
+
+      width: 100%;
+      max-width: 1000px;
+
+      margin-bottom: 10px;
+
+    }
+
+    .decoracion img {
+
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+    }
+
+
+    /* =========================
+       CONTENEDOR DEL TRÉBOL
+    ========================= */
+
+    .clover-container {
+
+      position: relative;
+
+      width: min(96vw, 1000px);
+
+      aspect-ratio: 1 / 1;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-top: 10px;
+
+      transition: height 0.4s ease;
+
+    }
+
+
+    /* =========================
+       SVG DEL TRÉBOL
+    ========================= */
+
+    .clover-frame {
+
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      z-index: 1;
+
+      pointer-events: none;
+
+      overflow: visible;
+
+    }
+
+
+    /* =========================
+       COTIZADOR
+    ========================= */
+
+    .cotizador {
+
+      position: relative;
+
+      z-index: 2;
+
+      width: 55%;
+
+      margin-top: 2%;
+
+      padding: 30px 10px;
+
+      text-align: center;
+
+    }
+
+
+    /* =========================
+       INPUT
+    ========================= */
+
+    .input-container {
+
+      position: relative;
+
+      width: 100%;
+
+    }
+
+    .input-usd {
+
+      width: 100%;
+
+      padding: 24px 70px 24px 25px;
+
+      border: 3px solid #9f2924;
+
+      border-radius: 22px;
+
+      background: rgba(255,255,255,0.80);
+
+      color: #555;
+
+      font-family: "Yeseva One", serif;
+
+      font-size: 28px;
+
+      outline: none;
+
+    }
+
+    .input-usd::placeholder {
+
+      color: #8c8c8c;
+
+      opacity: 1;
+
+    }
+
+    .input-usd:focus {
+
+      border-color: #4d7c12;
+
+      box-shadow:
+        0 0 0 5px
+        rgba(77,124,18,0.15);
+
+    }
+
+
+    /* SIGNO $ */
+
+    .simbolo {
+
+      position: absolute;
+
+      top: 50%;
+      right: 25px;
+
+      transform: translateY(-50%);
+
+      color: #96241f;
+
+      font-size: 42px;
+
+      pointer-events: none;
+
+    }
+
+
+    /* =========================
+       BOTÓN
+    ========================= */
+
+    button {
+
+      width: 100%;
+
+      margin-top: 25px;
+
+      padding: 23px;
+
+      border: none;
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #639b1a,
+          #3e700b
+        );
+
+      color: white;
+
+      font-family: "Yeseva One", serif;
+
+      font-size: 30px;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 7px 0 #315908,
+        inset 0 1px 2px rgba(255,255,255,0.2);
+
+      transition: 0.15s ease;
+
+    }
+
+    button:hover {
+
+      transform: translateY(-2px);
+
+    }
+
+    button:active {
+
+      transform: translateY(4px);
+
+      box-shadow:
+        0 3px 0 #315908;
+
+    }
+
+
+    /* =========================
+       SEPARADOR
+    ========================= */
+
+    .separador {
+
+      width: 100%;
+
+      margin: 35px 0 30px;
+
+      border-top:
+        2px dotted #5a8a18;
+
+    }
+
+
+    /* =========================
+       RESULTADO
+    ========================= */
+
+    .resultado {
+
+      display: none;
+
+      width: 100%;
+
+      min-height: 150px;
+
+      padding: 25px 15px;
+
+      border:
+        2px dashed #a52b25;
+
+      border-radius: 25px;
+
+      background:
+        rgba(255,255,255,0.35);
+
+      color: #94251f;
+
+      font-size: 50px;
+
+      text-align: center;
+
+      align-content: center;
+
+      word-break: break-word;
+
+    }
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    .error {
+
+      display: none;
+
+      margin-top: 20px;
+
+      color: #a0201b;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      text-align: center;
+
+    }
+
+
+    /* =========================
+       TEXTO DEBAJO DEL TRÉBOL
+    ========================= */
+
+    .aviso {
+
+      display: none;
+
+      width: min(90vw, 700px);
+
+      margin: 25px auto 0;
+
+      padding: 0 20px;
+
+      color: #35660c;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      line-height: 1.55;
+
+      text-align: center;
+
+    }
+
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      body {
+
+        padding:
+          0
+          5px
+          80px;
+
+      }
+
+
+      .clover-container {
+
+        width: 100vw;
+
+        aspect-ratio: auto;
+
+        height: 560px;
+
+      }
+
+
+      /* EL TRÉBOL CRECE
+         CUANDO APARECE EL RESULTADO */
+
+      .clover-container.cotizado {
+
+        height: 700px;
+
+      }
+
+
+      .cotizador {
+
+        width: 62%;
+
+        margin-top: 0;
+
+        padding: 20px 0;
+
+      }
+
+
+      .input-usd {
+
+        padding:
+          17px
+          50px
+          17px
+          15px;
+
+        font-size: 19px;
+
+        border-radius: 18px;
+
+      }
+
+
+      .simbolo {
+
+        right: 15px;
+
+        font-size: 30px;
+
+      }
+
+
+      button {
+
+        margin-top: 20px;
+
+        padding: 18px;
+
+        font-size: 22px;
+
+        border-radius: 18px;
+
+      }
+
+
+      .separador {
+
+        margin:
+          28px
+          0
+          23px;
+
+      }
+
+
+      .resultado {
+
+        min-height: 120px;
+
+        padding: 20px 8px;
+
+        font-size: 35px;
+
+        border-radius: 20px;
+
+      }
+
+
+      .aviso {
+
+        width: 88vw;
+
+        margin-top: 15px;
+
+        padding: 0;
+
+        font-size: 12px;
+
+        line-height: 1.55;
+
+      }
+
+
+      .error {
+
+        font-size: 12px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- DECORACIÓN SUPERIOR -->
+
+  <div class="decoracion">
+
+    <img
+      src="decoracion.png"
+      alt="Samahani Cotizador"
+    >
+
+  </div>
+
+
+
+  <!-- =========================
+       TRÉBOL
+  ========================== -->
+
+  <div
+    class="clover-container"
+    id="cloverContainer"
+  >
+
+
+    <!-- MARCO DEL TRÉBOL -->
+
+    <svg
+      class="clover-frame"
+
+      viewBox="0 0 1000 1000"
+
+      xmlns="http://www.w3.org/2000/svg"
+
+      preserveAspectRatio="xMidYMid meet"
+    >
+
+
+      <defs>
+
+
+        <!-- VERDE EXTERIOR -->
+
+        <linearGradient
+          id="cloverGreen"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="1"
+        >
+
+          <stop
+            offset="0%"
+            stop-color="#9dcc3f"
+          />
+
+          <stop
+            offset="45%"
+            stop-color="#5d9417"
+          />
+
+          <stop
+            offset="100%"
+            stop-color="#3f700b"
+          />
+
+        </linearGradient>
+
+
+        <!-- INTERIOR CREMA -->
+
+        <radialGradient
+          id="creamInside"
+          cx="50%"
+          cy="45%"
+          r="70%"
+        >
+
+          <stop
+            offset="0%"
+            stop-color="#fffdf7"
+          />
+
+          <stop
+            offset="70%"
+            stop-color="#fff8e7"
+          />
+
+          <stop
+            offset="100%"
+            stop-color="#f4e8cc"
+          />
+
+        </radialGradient>
+
+
+        <!-- SOMBRA -->
+
+        <filter
+          id="shadow"
+          x="-20%"
+          y="-20%"
+          width="140%"
+          height="140%"
+        >
+
+          <feDropShadow
+            dx="0"
+            dy="12"
+            stdDeviation="14"
+            flood-color="#315908"
+            flood-opacity="0.25"
+          />
+
+        </filter>
+
+      </defs>
+
+
+
+      <!-- =========================
+           TRÉBOL DE 4 HOJAS
+      ========================== -->
+
+      <path
+
+        d="
+
+          M500 500
+
+          C430 420,
+          220 450,
+          180 300
+
+          C140 150,
+          280 70,
+          390 140
+
+          C460 185,
+          480 280,
+          500 400
+
+          C520 280,
+          540 185,
+          610 140
+
+          C720 70,
+          860 150,
+          820 300
+
+          C780 450,
+          570 420,
+          500 500
+
+          C580 430,
+          550 220,
+          700 180
+
+          C850 140,
+          930 280,
+          860 390
+
+          C815 460,
+          720 480,
+          600 500
+
+          C720 520,
+          815 540,
+          860 610
+
+          C930 720,
+          850 860,
+          700 820
+
+          C550 780,
+          580 570,
+          500 500
+
+          C420 570,
+          450 780,
+          300 820
+
+          C150 860,
+          70 720,
+          140 610
+
+          C185 540,
+          280 520,
+          400 500
+
+          C280 480,
+          185 460,
+          140 390
+
+          C70 280,
+          150 140,
+          300 180
+
+          C450 220,
+          420 430,
+          500 500
+
+          Z
+
+        "
+
+        fill="url(#creamInside)"
+
+        stroke="url(#cloverGreen)"
+
+        stroke-width="48"
+
+        stroke-linejoin="round"
+
+        filter="url(#shadow)"
+
+      />
+
+
+      <!-- TALLO DEL TRÉBOL -->
+
+      <path
+
+        d="
+
+          M500 700
+
+          C520 790,
+          600 850,
+          690 910
+
+        "
+
+        fill="none"
+
+        stroke="#477b11"
+
+        stroke-width="32"
+
+        stroke-linecap="round"
+
+      />
+
+
+    </svg>
+
+
+
+    <!-- =========================
+         COTIZADOR
+    ========================== -->
+
+    <main class="cotizador">
+
+
+      <div class="input-container">
+
+        <input
+
+          type="number"
+
+          id="precioUSD"
+
+          class="input-usd"
+
+          placeholder="Precio en USD"
+
+          min="0"
+
+          step="0.01"
+
+        >
+
+        <span class="simbolo">$</span>
+
+      </div>
+
+
+
+      <button
+        type="button"
+        onclick="cotizar()"
+      >
+
+        COTIZAR
+
+      </button>
+
+
+
+      <div class="separador"></div>
+
+
+
+      <div
+        id="resultado"
+        class="resultado"
+      ></div>
+
+
+
+      <div
+        id="error"
+        class="error"
+      >
+
+        Ingresá un precio válido.
+
+      </div>
+
+
+    </main>
+
+
+  </div>
+
+
+
+  <!-- =========================
+       AVISO DEBAJO DEL TRÉBOL
+  ========================== -->
+
+  <div
+    id="aviso"
+    class="aviso"
+  >
+
+    La cotización ya incluye envío a casilla coreana,
+    faltan envío e impuestos argentinos.
+
+  </div>
+
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+
+    function cotizar() {
+
+
+      const precio = parseFloat(
+
+        document
+          .getElementById("precioUSD")
+          .value
+
+      );
+
+
+      /*
+        SIN FEES
+
+        Solo multiplicamos
+        directamente por 1600
+      */
+
+      const dolar = 1600;
+
+
+      const resultado =
+
+        document.getElementById(
+          "resultado"
+        );
+
+
+      const aviso =
+
+        document.getElementById(
+          "aviso"
+        );
+
+
+      const error =
+
+        document.getElementById(
+          "error"
+        );
+
+
+      const cloverContainer =
+
+        document.getElementById(
+          "cloverContainer"
+        );
+
+
+      /* VALIDACIÓN */
+
+
+      if (
+
+        isNaN(precio)
+
+        ||
+
+        precio <= 0
+
+      ) {
+
+
+        resultado.style.display = "none";
+
+        aviso.style.display = "none";
+
+        error.style.display = "block";
+
+        cloverContainer.classList.remove(
+          "cotizado"
+        );
+
+        return;
+
+      }
+
+
+      error.style.display = "none";
+
+
+      /* =========================
+         CÁLCULO SIN FEES
+      ========================== */
+
+
+      const totalARS =
+
+        precio * dolar;
+
+
+      /* MOSTRAR RESULTADO */
+
+
+      resultado.innerHTML =
+
+        "$ " +
+
+        totalARS.toLocaleString(
+
+          "es-AR",
+
+          {
+
+            minimumFractionDigits: 0,
+
+            maximumFractionDigits: 0
+
+          }
+
+        );
+
+
+      resultado.style.display = "block";
+
+
+      aviso.style.display = "block";
+
+
+      /* AGRANDAR EL TRÉBOL
+         EN CELULAR */
+
+
+      cloverContainer.classList.add(
+        "cotizado"
+      );
+
+
+    }
+
+
+    /* COTIZAR CON ENTER */
+
+
+    document
+      .getElementById("precioUSD")
+      .addEventListener(
+
+        "keydown",
+
+        function(event) {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            cotizar();
+
+          }
+
+        }
+
+      );
+
+
+  </script>
+
+
+</body>
+</html>
