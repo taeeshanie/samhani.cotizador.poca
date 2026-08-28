@@ -1,791 +1,644 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samahani Cotizador</title>
 
-  <title>Samahani Cotizador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- FUENTE YESEVA ONE -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"
-    rel="stylesheet"
-  >
+* {
+  box-sizing: border-box;
+}
 
-  <style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+/* =========================
+   FONDO REAL DE LA PÁGINA
+   ========================= */
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-    }
+.fondo-pagina {
+  position: fixed;
 
-    /* =========================
-       FONDO
-       ========================= */
+  top: 0;
+  left: 0;
 
-    body {
+  width: 100vw;
+  height: 100vh;
 
-      min-height: 100vh;
+  object-fit: cover;
+  object-position: center center;
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  z-index: -10;
 
-      font-family: "Yeseva One", serif;
+  pointer-events: none;
+}
 
-      /* PRIMERA IMAGEN */
-      background-image: url("./fondo.png");
+/* ========================= */
 
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
+body {
 
-      background-color: #35610d;
+  min-height: 100vh;
 
-      overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-      padding-bottom: 50px;
+  font-family: "Yeseva One", serif;
 
-    }
+  background-color: #244d0a;
 
+  overflow-x: hidden;
 
-    /* =========================
-       DECORACIÓN / LOGO
-       SEGUNDA IMAGEN
-       ========================= */
+  padding-bottom: 50px;
 
-    .decoracion {
+}
 
-      width: min(90vw, 900px);
+/* =========================
+   DECORACIÓN
+   ========================= */
 
-      margin-top: 15px;
+.decoracion {
 
-      display: flex;
-      justify-content: center;
+  width: min(90vw, 850px);
 
-      position: relative;
-      z-index: 2;
+  margin-top: 20px;
 
-    }
+  position: relative;
 
-    .decoracion img {
+  z-index: 2;
 
-      width: 100%;
-      height: auto;
+}
 
-      display: block;
+.decoracion img {
 
-    }
+  width: 100%;
+  height: auto;
 
+  display: block;
 
-    /* =========================
-       CONTENEDOR DEL PLATO
-       ========================= */
+}
 
-    .contenedor-plato {
+/* =========================
+   CONTENEDOR DEL PLATO
+   ========================= */
 
-      position: relative;
+.contenedor-plato {
 
-      width: min(92vw, 850px);
+  position: relative;
 
-      margin-top: -10px;
+  width: min(92vw, 800px);
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  margin-top: -20px;
 
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+}
 
-    /* =========================
-       TERCERA IMAGEN: PLATO
-       ========================= */
+/* =========================
+   PLATO
+   ========================= */
 
-    .plato {
+.plato {
 
-      width: 100%;
-      height: auto;
+  width: 100%;
+  height: auto;
 
-      display: block;
+  display: block;
 
-      position: relative;
+  position: relative;
 
-      z-index: 1;
+  z-index: 1;
 
-      pointer-events: none;
+  pointer-events: none;
 
-    }
+}
 
+/* =========================
+   COTIZADOR
+   ========================= */
 
-    /* =========================
-       COTIZADOR
-       VA SOBRE EL CENTRO DEL PLATO
-       ========================= */
+.cotizador {
 
-    .cotizador {
+  position: absolute;
 
-      position: absolute;
+  z-index: 2;
 
-      z-index: 2;
+  width: 54%;
 
-      width: 58%;
+  top: 50%;
+  left: 50%;
 
-      top: 50%;
-      left: 50%;
+  transform: translate(-50%, -50%);
 
-      transform: translate(-50%, -50%);
+  text-align: center;
 
-      display: flex;
-      flex-direction: column;
+}
 
-      align-items: center;
+/* =========================
+   INPUT
+   ========================= */
 
-      text-align: center;
+.input-contenedor {
 
-    }
+  position: relative;
 
+  width: 100%;
 
-    /* =========================
-       INPUT
-       ========================= */
+}
 
-    .input-contenedor {
+.input-usd {
 
-      position: relative;
+  width: 100%;
 
-      width: 100%;
+  padding: 20px 65px 20px 22px;
 
-    }
+  border: 2px solid #9d2924;
 
+  border-radius: 20px;
 
-    .input-usd {
+  background: rgba(255,255,255,0.80);
 
-      width: 100%;
+  color: #555;
 
-      padding: 20px 65px 20px 22px;
+  font-family: "Yeseva One", serif;
 
-      border: 2px solid #a32622;
+  font-size: 24px;
 
-      border-radius: 20px;
+  outline: none;
 
-      background: rgba(255, 255, 255, 0.75);
+}
 
-      color: #555;
+.input-usd::placeholder {
 
-      font-family: "Yeseva One", serif;
+  color: #777;
 
-      font-size: 24px;
+}
 
-      outline: none;
+.input-usd:focus {
 
-    }
+  border-color: #7d211d;
 
+  box-shadow: 0 0 0 4px rgba(157,41,36,0.15);
 
-    .input-usd::placeholder {
+}
 
-      color: #777;
+.simbolo {
 
-      opacity: 1;
+  position: absolute;
 
-    }
+  top: 50%;
+  right: 22px;
 
+  transform: translateY(-50%);
 
-    .input-usd:focus {
+  color: #92251f;
 
-      border-color: #8f1f1b;
+  font-size: 36px;
 
-      box-shadow:
-        0 0 0 4px
-        rgba(163, 38, 34, 0.12);
+  pointer-events: none;
 
-    }
+}
 
+/* =========================
+   BOTÓN
+   ========================= */
 
-    /* SIGNO $ */
+.boton-cotizar {
 
-    .simbolo {
+  width: 100%;
 
-      position: absolute;
+  margin-top: 20px;
 
-      right: 22px;
-      top: 50%;
+  padding: 20px;
 
-      transform: translateY(-50%);
+  border: none;
 
-      color: #99241f;
+  border-radius: 20px;
 
-      font-size: 36px;
+  background: linear-gradient(
+    135deg,
+    #63951b,
+    #416d0e
+  );
 
-      pointer-events: none;
+  color: white;
 
-    }
+  font-family: "Yeseva One", serif;
 
+  font-size: 25px;
 
-    /* =========================
-       BOTÓN
-       ========================= */
+  cursor: pointer;
 
-    .boton-cotizar {
+  box-shadow: 0 6px 0 #31510d;
 
-      width: 100%;
+}
 
-      margin-top: 20px;
+.boton-cotizar:active {
 
-      padding: 20px;
+  transform: translateY(4px);
 
-      border: none;
+  box-shadow: 0 2px 0 #31510d;
 
-      border-radius: 20px;
+}
 
-      background: linear-gradient(
-        135deg,
-        #628f20,
-        #3f6810
-      );
+/* =========================
+   SEPARADOR
+   ========================= */
 
-      color: white;
+.separador {
 
-      font-family: "Yeseva One", serif;
+  width: 100%;
 
-      font-size: 25px;
+  margin: 30px 0 25px;
 
-      cursor: pointer;
+  border-top: 2px dotted #a52b25;
 
-      box-shadow: 0 6px 0 #31510d;
+}
 
-      transition: 0.15s ease;
+/* =========================
+   RESULTADO
+   ========================= */
 
-    }
+.resultado {
 
+  display: none;
 
-    .boton-cotizar:hover {
+  width: 100%;
 
-      transform: translateY(-2px);
+  padding: 25px 15px;
 
-    }
+  border: 2px dashed #a52b25;
 
+  border-radius: 22px;
 
-    .boton-cotizar:active {
+  background: rgba(255,255,255,0.18);
 
-      transform: translateY(4px);
+  color: #92251f;
 
-      box-shadow: 0 2px 0 #31510d;
+  font-size: 42px;
 
-    }
+  word-break: break-word;
 
+}
 
-    /* =========================
-       SEPARADOR
-       ========================= */
+/* =========================
+   ERROR
+   ========================= */
 
-    .separador {
+.error {
 
-      width: 100%;
+  display: none;
 
-      border-top: 2px dotted #b02d28;
+  margin-top: 15px;
 
-      margin: 30px 0 25px;
+  color: #a0201b;
 
-    }
+  font-family: Arial, sans-serif;
 
+  font-weight: bold;
 
-    /* =========================
-       RESULTADO
-       ========================= */
+}
 
-    .resultado {
+/* =========================
+   AVISO
+   ========================= */
 
-      width: 100%;
+.aviso {
 
-      display: none;
+  display: none;
 
-      padding: 25px 15px;
+  width: min(88vw, 650px);
 
-      border: 2px dashed #a52b25;
+  margin-top: 15px;
 
-      border-radius: 22px;
+  padding: 15px 20px;
 
-      color: #92251f;
+  background: rgba(255,255,255,0.70);
 
-      background: rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
 
-      font-size: 45px;
+  color: #7d211d;
 
-      text-align: center;
+  font-family: Arial, sans-serif;
 
-      word-break: break-word;
+  font-size: 15px;
 
-    }
+  font-weight: bold;
 
+  line-height: 1.6;
 
-    /* =========================
-       ERROR
-       ========================= */
+  text-align: center;
 
-    .error {
+  position: relative;
 
-      display: none;
+  z-index: 2;
 
-      margin-top: 18px;
+}
 
-      color: #9c201c;
+/* =========================
+   CELULAR
+   ========================= */
 
-      font-family: Arial, sans-serif;
+@media (max-width: 600px) {
 
-      font-size: 15px;
+  .fondo-pagina {
 
-      font-weight: bold;
+    object-position: center top;
 
-      text-align: center;
+  }
 
-    }
+  .decoracion {
 
+    width: 96vw;
 
-    /* =========================
-       AVISO
-       DEBAJO DEL PLATO
-       ========================= */
+    margin-top: 10px;
 
-    .aviso {
+  }
 
-      display: none;
+  .contenedor-plato {
 
-      width: min(88vw, 650px);
+    width: 115vw;
 
-      margin-top: 10px;
+    max-width: none;
 
-      padding: 10px 20px;
+    margin-top: -10px;
 
-      color: #7d211d;
+  }
 
-      background: rgba(255, 255, 255, 0.65);
+  .cotizador {
 
-      border-radius: 15px;
+    width: 48%;
 
-      font-family: Arial, sans-serif;
+  }
 
-      font-size: 15px;
+  .input-usd {
 
-      font-weight: bold;
+    padding: 14px 42px 14px 12px;
 
-      line-height: 1.6;
+    border-radius: 14px;
 
-      text-align: center;
+    font-size: 15px;
 
-      position: relative;
-      z-index: 3;
+  }
 
-    }
+  .simbolo {
 
+    right: 13px;
 
-    /* =========================
-       CELULAR
-       ========================= */
+    font-size: 24px;
 
-    @media (max-width: 600px) {
+  }
 
-      body {
+  .boton-cotizar {
 
-        background-image: url("./fondo.png");
+    margin-top: 13px;
 
-        background-size: cover;
+    padding: 14px;
 
-        background-position: center top;
+    border-radius: 14px;
 
-        background-repeat: no-repeat;
+    font-size: 16px;
 
-        background-attachment: scroll;
+    box-shadow: 0 4px 0 #31510d;
 
-        padding-bottom: 40px;
+  }
 
-      }
+  .separador {
 
+    margin: 20px 0 16px;
 
-      .decoracion {
+  }
 
-        width: 96vw;
+  .resultado {
 
-        margin-top: 10px;
+    padding: 18px 8px;
 
-      }
+    border-radius: 15px;
 
+    font-size: 27px;
 
-      /*
-       El plato se hace más grande
-       que la pantalla para que el
-       cotizador entre cómodamente
-      */
+  }
 
-      .contenedor-plato {
+  .aviso {
 
-        width: 125vw;
+    width: 88vw;
 
-        max-width: none;
+    margin-top: 5px;
 
-        margin-top: -5px;
+    font-size: 12px;
 
-      }
+    line-height: 1.5;
 
+  }
 
-      .cotizador {
+}
 
-        width: 48%;
-
-      }
-
-
-      .input-usd {
-
-        padding: 14px 42px 14px 12px;
-
-        border-radius: 14px;
-
-        font-size: 15px;
-
-      }
-
-
-      .simbolo {
-
-        right: 13px;
-
-        font-size: 24px;
-
-      }
-
-
-      .boton-cotizar {
-
-        margin-top: 13px;
-
-        padding: 14px;
-
-        border-radius: 14px;
-
-        font-size: 16px;
-
-        box-shadow: 0 4px 0 #31510d;
-
-      }
-
-
-      .separador {
-
-        margin: 20px 0 16px;
-
-      }
-
-
-      .resultado {
-
-        padding: 18px 8px;
-
-        border-radius: 15px;
-
-        font-size: 27px;
-
-      }
-
-
-      .error {
-
-        font-size: 11px;
-
-      }
-
-
-      .aviso {
-
-        width: 88vw;
-
-        margin-top: -5px;
-
-        font-size: 12px;
-
-        line-height: 1.5;
-
-      }
-
-    }
-
-
-    /* =========================
-       CELULARES MUY PEQUEÑOS
-       ========================= */
-
-    @media (max-width: 380px) {
-
-      .contenedor-plato {
-
-        width: 135vw;
-
-      }
-
-      .cotizador {
-
-        width: 46%;
-
-      }
-
-      .input-usd {
-
-        font-size: 13px;
-
-      }
-
-      .boton-cotizar {
-
-        font-size: 14px;
-
-      }
-
-      .resultado {
-
-        font-size: 23px;
-
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
-
 <body>
 
+<!-- =========================
+     FONDO
+     PRIMERA IMAGEN
+     ========================= -->
 
-  <!-- =========================
-       SEGUNDA IMAGEN:
-       DECORACIÓN
-       ========================= -->
-
-  <div class="decoracion">
-
-    <img
-      src="./decoracion.png"
-      alt="Samahani Cotizador"
-    >
-
-  </div>
+<img
+  src="fondo.png"
+  class="fondo-pagina"
+  alt=""
+>
 
 
-  <!-- =========================
-       PLATO + COTIZADOR
-       ========================= -->
+<!-- =========================
+     DECORACIÓN
+     SEGUNDA IMAGEN
+     ========================= -->
 
-  <div class="contenedor-plato">
+<div class="decoracion">
 
+  <img
+    src="decoracion.png"
+    alt="Samahani Cotizador"
+  >
 
-    <!-- TERCERA IMAGEN: PLATO -->
-
-    <img
-      src="./plato.png"
-      class="plato"
-      alt=""
-    >
-
-
-    <!-- COTIZADOR -->
-
-    <div class="cotizador">
+</div>
 
 
-      <!-- INPUT -->
+<!-- =========================
+     PLATO + COTIZADOR
+     ========================= -->
 
-      <div class="input-contenedor">
+<div class="contenedor-plato">
 
-        <input
-          type="number"
-          id="precioUSD"
-          class="input-usd"
-          placeholder="Precio en USD"
-          min="0"
-          step="0.01"
-        >
+  <!-- TERCERA IMAGEN -->
 
-        <span class="simbolo">$</span>
-
-      </div>
+  <img
+    src="plato.png"
+    class="plato"
+    alt=""
+  >
 
 
-      <!-- BOTÓN -->
+  <div class="cotizador">
 
-      <button
-        class="boton-cotizar"
-        type="button"
-        onclick="cotizar()"
+
+    <div class="input-contenedor">
+
+      <input
+        type="number"
+        id="precioUSD"
+        class="input-usd"
+        placeholder="Precio en USD"
+        min="0"
+        step="0.01"
       >
 
-        COTIZAR
-
-      </button>
-
-
-      <!-- SEPARADOR -->
-
-      <div class="separador"></div>
-
-
-      <!-- RESULTADO -->
-
-      <div
-        id="resultado"
-        class="resultado"
-      ></div>
-
-
-      <!-- ERROR -->
-
-      <div
-        id="error"
-        class="error"
-      >
-
-        Ingresá un precio válido.
-
-      </div>
-
+      <span class="simbolo">$</span>
 
     </div>
 
+
+    <button
+      type="button"
+      class="boton-cotizar"
+      onclick="cotizar()"
+    >
+      COTIZAR
+    </button>
+
+
+    <div class="separador"></div>
+
+
+    <div
+      id="resultado"
+      class="resultado"
+    ></div>
+
+
+    <div
+      id="error"
+      class="error"
+    >
+      Ingresá un precio válido.
+    </div>
+
+
   </div>
 
-
-  <!-- =========================
-       TEXTO DEBAJO DEL PLATO
-       ========================= -->
-
-  <div
-    id="aviso"
-    class="aviso"
-  >
-
-    La cotización ya incluye envío a casilla coreana,
-    faltan envío e impuestos argentinos.
-
-  </div>
+</div>
 
 
-  <!-- =========================
-       JAVASCRIPT
-       ========================= -->
+<!-- =========================
+     AVISO
+     ========================= -->
 
-  <script>
+<div
+  id="aviso"
+  class="aviso"
+>
 
-    function cotizar() {
+  La cotización ya incluye envío a casilla coreana,
+  faltan envío e impuestos argentinos.
 
-      const precio = parseFloat(
-        document
-          .getElementById("precioUSD")
-          .value
-      );
-
-
-      /* DÓLAR FIJO */
-
-      const dolar = 1600;
+</div>
 
 
-      const resultado =
-        document.getElementById("resultado");
+<script>
 
-      const error =
-        document.getElementById("error");
+function cotizar() {
 
-      const aviso =
-        document.getElementById("aviso");
+  const precio = parseFloat(
+    document.getElementById("precioUSD").value
+  );
+
+  const dolar = 1600;
+
+  const resultado =
+    document.getElementById("resultado");
+
+  const error =
+    document.getElementById("error");
+
+  const aviso =
+    document.getElementById("aviso");
 
 
-      /* VALIDACIÓN */
+  if (isNaN(precio) || precio <= 0) {
 
-      if (
-        isNaN(precio) ||
-        precio <= 0
-      ) {
+    resultado.style.display = "none";
 
-        resultado.style.display = "none";
+    aviso.style.display = "none";
 
-        aviso.style.display = "none";
+    error.style.display = "block";
 
-        error.style.display = "block";
+    return;
 
-        return;
+  }
+
+
+  error.style.display = "none";
+
+
+  /* SIN FEES */
+
+  const totalARS = precio * dolar;
+
+
+  resultado.innerHTML =
+    "$ " +
+    totalARS.toLocaleString(
+      "es-AR",
+      {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }
+    );
+
+
+  resultado.style.display = "block";
+
+  aviso.style.display = "block";
+
+}
+
+
+/* COTIZAR CON ENTER */
+
+document
+  .getElementById("precioUSD")
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (event.key === "Enter") {
+
+        cotizar();
 
       }
 
-
-      /* OCULTAR ERROR */
-
-      error.style.display = "none";
-
-
-      /*
-       CÁLCULO
-
-       SIN FEES
-       PRECIO × 1600
-      */
-
-      const totalARS = precio * dolar;
-
-
-      /* MOSTRAR RESULTADO */
-
-      resultado.innerHTML =
-        "$ " +
-        totalARS.toLocaleString(
-          "es-AR",
-          {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-          }
-        );
-
-
-      resultado.style.display = "block";
-
-
-      /* MOSTRAR AVISO */
-
-      aviso.style.display = "block";
-
     }
+  );
 
-
-    /* COTIZAR PRESIONANDO ENTER */
-
-    document
-      .getElementById("precioUSD")
-      .addEventListener(
-        "keydown",
-        function(event) {
-
-          if (event.key === "Enter") {
-
-            cotizar();
-
-          }
-
-        }
-      );
-
-  </script>
+</script>
 
 </body>
-
 </html>
